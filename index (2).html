@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Navatha Tuition Services — Online Tuition for Grades 4–12</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1A3FFF;
+    --accent: #4D6FFF;
+    --gold: #F4A800;
+    --light: #F0F3FF;
+    --white: #ffffff;
+    --text: #0d1a4a;
+    --muted: #5a6a99;
+    --border: #d8dff5;
+    --success: #00875A;
+    --danger: #DE350B;
+    --card-shadow: 0 4px 24px rgba(26,63,255,0.10);
+    --card-radius: 16px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 70px;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--primary); display: flex; align-items: center; justify-content: center;
+  }
+  .logo-icon svg { width: 22px; height: 22px; }
+  .logo-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--primary); line-height: 1.1; }
+  .logo-sub { font-size: 0.65rem; font-weight: 500; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text); font-size: 0.92rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta { background: var(--primary); color: #fff !important; padding: 0.55rem 1.3rem; border-radius: 8px; transition: background 0.2s !important; }
+  .nav-cta:hover { background: var(--accent) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    background: linear-gradient(135deg, #0a1f99 0%, #1A3FFF 50%, #0a1f99 100%);
+    position: relative; overflow: hidden; padding: 100px 5% 60px;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(77,111,255,0.25) 0%, transparent 70%);
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    align-items: center; max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(0,180,216,0.15); border: 1px solid rgba(0,180,216,0.4);
+    color: var(--accent); padding: 6px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 1.5rem;
+  }
+  .hero h1 em { color: var(--accent); font-style: italic; }
+  .hero p { color: rgba(255,255,255,0.75); font-size: 1.05rem; line-height: 1.7; margin-bottom: 2rem; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: var(--primary); padding: 0.85rem 2rem;
+    border-radius: 10px; font-weight: 700; text-decoration: none; font-size: 0.95rem;
+    display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,180,216,0.4); }
+  .btn-outline {
+    background: transparent; color: #fff; padding: 0.85rem 2rem;
+    border-radius: 10px; font-weight: 600; text-decoration: none; font-size: 0.95rem;
+    border: 1.5px solid rgba(255,255,255,0.4); cursor: pointer;
+    transition: background 0.15s, border-color 0.15s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.7); }
+  .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.5rem; }
+  .hero-stat { text-align: center; padding: 1rem; border-radius: 12px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); }
+  .hero-stat .num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--accent); }
+  .hero-stat .label { font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 2px; }
+  .hero-visual { position: relative; display: flex; align-items: center; justify-content: center; }
+  .hero-card-stack { position: relative; width: 100%; max-width: 440px; }
+  .float-card {
+    background: rgba(255,255,255,0.10); backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 1.25rem 1.5rem;
+    color: #fff;
+  }
+  .float-card.main { padding: 1.5rem 2rem; margin-bottom: 1rem; }
+  .fc-label { font-size: 0.75rem; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
+  .fc-subject { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .fc-meta { font-size: 0.82rem; color: rgba(255,255,255,0.65); margin-bottom: 1rem; }
+  .progress-bar { background: rgba(255,255,255,0.15); border-radius: 50px; height: 6px; margin-bottom: 4px; }
+  .progress-fill { height: 100%; border-radius: 50px; background: var(--accent); }
+  .float-cards-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .mini-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 1rem; }
+  .mini-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(0,180,216,0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem; font-size: 1.1rem; }
+  .mini-label { font-size: 0.7rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.05em; }
+  .mini-value { font-size: 1.1rem; font-weight: 700; color: #fff; }
+
+  /* SECTION COMMON */
+  section { padding: 80px 5%; }
+  .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; color: var(--primary); margin-bottom: 1rem; }
+  .section-subtitle { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 580px; }
+  .section-header { margin-bottom: 3rem; }
+  .centered { text-align: center; }
+  .centered .section-subtitle { margin: 0 auto; }
+
+  /* GRADES */
+  .grades-section { background: var(--light); }
+  .grades-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 0.75rem; margin-top: 2rem; }
+  .grade-chip {
+    background: var(--white); border: 1.5px solid var(--border); border-radius: 12px;
+    padding: 1rem 0.5rem; text-align: center; cursor: pointer; transition: all 0.2s;
+    text-decoration: none; color: var(--text); display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .grade-chip:hover, .grade-chip.active { background: var(--primary); border-color: var(--primary); color: #fff; transform: translateY(-3px); box-shadow: var(--card-shadow); }
+  .grade-chip .gnum { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; }
+  .grade-chip .glabel { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.7; }
+
+  /* SUBJECTS */
+  .subjects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.25rem; margin-top: 2rem; }
+  .subject-card {
+    background: var(--white); border: 1px solid var(--border); border-radius: var(--card-radius);
+    padding: 1.5rem; cursor: pointer; transition: all 0.25s; position: relative; overflow: hidden; text-decoration: none; color: inherit;
+  }
+  .subject-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.25s;
+  }
+  .subject-card:hover { box-shadow: var(--card-shadow); transform: translateY(-4px); border-color: transparent; }
+  .subject-card:hover::before { transform: scaleX(1); }
+  .subject-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+  .subject-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.25rem; }
+  .subject-grades { font-size: 0.75rem; color: var(--muted); }
+
+  /* TEACHERS */
+  .teachers-section { background: var(--light); }
+  .teachers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; }
+  .teacher-card { background: var(--white); border-radius: var(--card-radius); overflow: hidden; box-shadow: var(--card-shadow); transition: transform 0.2s; }
+  .teacher-card:hover { transform: translateY(-4px); }
+  .teacher-avatar {
+    height: 180px; display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; color: #fff;
+  }
+  .teacher-info { padding: 1.25rem; }
+  .teacher-name { font-weight: 700; font-size: 1rem; margin-bottom: 2px; }
+  .teacher-subject { font-size: 0.8rem; color: var(--accent); font-weight: 600; margin-bottom: 0.5rem; }
+  .teacher-bio { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+  .teacher-rating { display: flex; align-items: center; gap: 4px; margin-top: 0.75rem; font-size: 0.82rem; font-weight: 600; color: var(--gold); }
+
+  /* HOW IT WORKS */
+  .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; }
+  .step { padding: 2rem; position: relative; }
+  .step:not(:last-child)::after {
+    content: '→'; position: absolute; right: -0.5rem; top: 50%; transform: translateY(-50%);
+    font-size: 1.5rem; color: var(--border); z-index: 1;
+  }
+  .step-num {
+    width: 48px; height: 48px; background: var(--primary); color: #fff;
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900;
+    margin-bottom: 1rem;
+  }
+  .step h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .step p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+  /* PRICING */
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; align-items: start; }
+  .pricing-card {
+    background: var(--white); border: 2px solid var(--border); border-radius: var(--card-radius);
+    padding: 2rem; transition: all 0.2s; position: relative;
+  }
+  .pricing-card.featured { border-color: var(--accent); }
+  .featured-badge {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: var(--primary); font-size: 0.72rem; font-weight: 700;
+    padding: 4px 16px; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+  }
+  .plan-name { font-size: 0.85rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+  .plan-price { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900; color: var(--primary); margin-bottom: 0.25rem; }
+  .plan-price span { font-size: 1rem; font-weight: 400; font-family: 'DM Sans', sans-serif; color: var(--muted); }
+  .plan-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.6; }
+  .plan-features { list-style: none; margin-bottom: 2rem; }
+  .plan-features li { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .plan-features li:last-child { border: none; }
+  .plan-features .check { color: var(--success); font-size: 1rem; }
+  .plan-features .cross { color: var(--muted); font-size: 1rem; }
+  .btn-plan {
+    width: 100%; padding: 0.85rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem;
+    cursor: pointer; border: 2px solid var(--primary); background: transparent; color: var(--primary);
+    transition: all 0.2s; text-align: center; display: block; text-decoration: none;
+  }
+  .btn-plan:hover { background: var(--primary); color: #fff; }
+  .btn-plan.featured-btn { background: var(--primary); color: #fff; }
+  .btn-plan.featured-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--primary); }
+
+  /* PAYMENT SECTION */
+  .payment-section { background: var(--primary); }
+  .payment-section .section-title { color: #fff; }
+  .payment-section .section-subtitle { color: rgba(255,255,255,0.65); }
+  .payment-section .section-label { color: var(--accent); }
+  .payment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .payment-features { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem; }
+  .payment-feature { display: flex; align-items: flex-start; gap: 1rem; }
+  .pf-icon { width: 44px; height: 44px; flex-shrink: 0; background: rgba(0,180,216,0.15); border: 1px solid rgba(0,180,216,0.3); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+  .pf-title { font-weight: 600; color: #fff; font-size: 0.92rem; margin-bottom: 2px; }
+  .pf-desc { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
+
+  /* PAYMENT FORM CARD */
+  .payment-form-card {
+    background: var(--white); border-radius: 20px; padding: 2rem; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .pf-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+  .pf-title-main { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--primary); }
+  .bml-badge { background: #003399; color: #fff; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; letter-spacing: 0.04em; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { margin-bottom: 1rem; }
+  .form-label { font-size: 0.78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 6px; }
+  .form-input {
+    width: 100%; padding: 0.7rem 0.9rem; border: 1.5px solid var(--border); border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--text);
+    transition: border-color 0.2s; outline: none; background: var(--light);
+  }
+  .form-input:focus { border-color: var(--accent); background: var(--white); }
+  .form-select { width: 100%; padding: 0.7rem 0.9rem; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--text); background: var(--light); outline: none; cursor: pointer; }
+  .card-number-input { font-family: 'DM Mono', monospace; letter-spacing: 0.05em; }
+  .card-icons { display: flex; gap: 8px; align-items: center; margin-bottom: 0.75rem; }
+  .card-icon { height: 28px; border-radius: 4px; border: 1px solid var(--border); padding: 3px 8px; font-size: 0.65rem; font-weight: 700; display: flex; align-items: center; }
+  .card-icon.visa { background: #1a1f71; color: #fff; }
+  .card-icon.mc { background: #eb001b; color: #fff; }
+  .card-icon.bml { background: #003399; color: #fff; }
+  .total-row { background: var(--light); border-radius: 10px; padding: 1rem; margin: 1rem 0; display: flex; justify-content: space-between; align-items: center; }
+  .total-label { font-size: 0.85rem; color: var(--muted); }
+  .total-amount { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--primary); }
+  .total-currency { font-size: 0.8rem; color: var(--muted); margin-left: 4px; }
+  .pay-btn {
+    width: 100%; padding: 1rem; background: var(--primary); color: #fff; border: none;
+    border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer;
+    transition: background 0.2s, transform 0.15s; display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .pay-btn:hover { background: var(--accent); color: var(--primary); transform: translateY(-1px); }
+  .secure-note { text-align: center; margin-top: 0.75rem; font-size: 0.75rem; color: var(--muted); display: flex; align-items: center; justify-content: center; gap: 5px; }
+
+  /* TESTIMONIALS */
+  .testimonials-section { background: var(--light); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+  .testimonial-card { background: var(--white); border-radius: var(--card-radius); padding: 1.75rem; box-shadow: var(--card-shadow); }
+  .testi-stars { color: var(--gold); font-size: 1rem; margin-bottom: 0.75rem; }
+  .testi-quote { font-size: 0.92rem; color: var(--text); line-height: 1.7; font-style: italic; margin-bottom: 1.25rem; }
+  .testi-author { display: flex; align-items: center; gap: 10px; }
+  .testi-avatar { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; color: #fff; }
+  .testi-name { font-weight: 600; font-size: 0.88rem; }
+  .testi-role { font-size: 0.75rem; color: var(--muted); }
+
+  /* FAQ */
+  .faq-section {}
+  .faq-grid { max-width: 760px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-question {
+    width: 100%; background: none; border: none; text-align: left; padding: 1.25rem 0;
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--text);
+    cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  }
+  .faq-icon { color: var(--accent); font-size: 1.2rem; transition: transform 0.2s; flex-shrink: 0; }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .faq-answer p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; padding-bottom: 1.25rem; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-item.open .faq-answer { max-height: 200px; }
+
+  /* ENROLL MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 2000;
+    background: rgba(10,37,64,0.7); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--white); border-radius: 20px; padding: 2.5rem;
+    max-width: 520px; width: 90%; max-height: 90vh; overflow-y: auto;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.3); position: relative;
+  }
+  .modal-close { position: absolute; top: 1.25rem; right: 1.25rem; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--muted); }
+  .modal-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 0.25rem; }
+  .modal-subtitle { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.75rem; }
+  .modal .form-group { margin-bottom: 1.1rem; }
+  .step-indicator { display: flex; gap: 6px; margin-bottom: 2rem; }
+  .step-dot { flex: 1; height: 4px; border-radius: 50px; background: var(--border); transition: background 0.3s; }
+  .step-dot.active { background: var(--accent); }
+
+  /* FOOTER */
+  footer { background: var(--primary); color: rgba(255,255,255,0.7); padding: 60px 5% 30px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-brand .logo-text { color: #fff; margin-bottom: 0.75rem; font-size: 1.3rem; }
+  .footer-brand p { font-size: 0.85rem; line-height: 1.7; }
+  .footer-col h4 { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.9); margin-bottom: 1rem; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .footer-col a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--accent); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; }
+  .footer-bottom p { font-size: 0.8rem; }
+  .footer-bottom .bml-trust { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; }
+  .bml-seal { background: #003399; color: #fff; font-size: 0.65rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
+
+  /* SUCCESS SCREEN */
+  .success-screen { display: none; text-align: center; padding: 2rem 0; }
+  .success-icon { width: 72px; height: 72px; background: #ECFDF5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1.25rem; }
+  .success-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
+  .success-msg { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+  .ref-code { background: var(--light); border-radius: 10px; padding: 1rem; margin: 1.25rem 0; font-family: monospace; font-size: 1.1rem; letter-spacing: 0.1em; color: var(--primary); font-weight: 700; }
+
+  @media (max-width: 900px) {
+    .hero-grid, .payment-grid, .footer-grid { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .step:not(:last-child)::after { display: none; }
+    nav { padding: 0 4%; }
+    .nav-links { gap: 1rem; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  /* ===================== SCROLL ANIMATIONS ===================== */
+  /* Base hidden state for reveal elements */
+  .reveal {
+    opacity: 0;
+    transform: translateY(48px);
+    transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.reveal-left {
+    transform: translateX(-56px);
+  }
+  .reveal.reveal-right {
+    transform: translateX(56px);
+  }
+  .reveal.reveal-scale {
+    transform: scale(0.88) translateY(24px);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+  /* Stagger delays for child groups */
+  .stagger > *:nth-child(1) { transition-delay: 0s; }
+  .stagger > *:nth-child(2) { transition-delay: 0.08s; }
+  .stagger > *:nth-child(3) { transition-delay: 0.16s; }
+  .stagger > *:nth-child(4) { transition-delay: 0.24s; }
+  .stagger > *:nth-child(5) { transition-delay: 0.32s; }
+  .stagger > *:nth-child(6) { transition-delay: 0.40s; }
+  .stagger > *:nth-child(7) { transition-delay: 0.48s; }
+  .stagger > *:nth-child(8) { transition-delay: 0.56s; }
+  .stagger > *:nth-child(9) { transition-delay: 0.64s; }
+  .stagger > *:nth-child(10) { transition-delay: 0.72s; }
+  .stagger > *:nth-child(11) { transition-delay: 0.80s; }
+  .stagger > *:nth-child(12) { transition-delay: 0.88s; }
+  .stagger > *:nth-child(13) { transition-delay: 0.96s; }
+  .stagger > *:nth-child(14) { transition-delay: 1.04s; }
+  .stagger > *:nth-child(15) { transition-delay: 1.12s; }
+  .stagger > *:nth-child(16) { transition-delay: 1.20s; }
+
+  /* Hero entrance */
+  .hero-badge { animation: fadeSlideDown 0.8s cubic-bezier(0.16,1,0.3,1) 0.2s both; }
+  .hero h1    { animation: fadeSlideUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.35s both; }
+  .hero p     { animation: fadeSlideUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s both; }
+  .hero-actions { animation: fadeSlideUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.65s both; }
+  .hero-stats   { animation: fadeSlideUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.8s both; }
+  .hero-visual  { animation: fadeSlideLeft 1s cubic-bezier(0.16,1,0.3,1) 0.5s both; }
+
+  @keyframes fadeSlideDown {
+    from { opacity:0; transform: translateY(-24px); }
+    to   { opacity:1; transform: none; }
+  }
+  @keyframes fadeSlideUp {
+    from { opacity:0; transform: translateY(32px); }
+    to   { opacity:1; transform: none; }
+  }
+  @keyframes fadeSlideLeft {
+    from { opacity:0; transform: translateX(48px); }
+    to   { opacity:1; transform: none; }
+  }
+
+  /* Floating particles in hero */
+  .particle {
+    position: absolute; border-radius: 50%; pointer-events: none;
+    background: rgba(0,180,216,0.18);
+    animation: float linear infinite;
+  }
+  @keyframes float {
+    0%   { transform: translateY(0) rotate(0deg); opacity:0; }
+    10%  { opacity:1; }
+    90%  { opacity:0.5; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity:0; }
+  }
+
+  /* Parallax image banner */
+  .img-banner {
+    position: relative; overflow: hidden; height: 320px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .img-banner img {
+    position: absolute; inset: 0; width: 100%; height: 140%; object-fit: cover;
+    top: -20%; will-change: transform;
+    filter: brightness(0.45);
+  }
+  .img-banner-overlay {
+    position: relative; z-index: 1; text-align: center; color: #fff; padding: 2rem;
+  }
+  .img-banner-overlay .quote {
+    font-family: 'Playfair Display', serif; font-size: clamp(1.3rem, 3vw, 2.2rem);
+    font-weight: 700; line-height: 1.3; max-width: 700px; margin: 0 auto 1rem;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+  }
+  .img-banner-overlay .attr {
+    font-size: 0.85rem; color: rgba(255,255,255,0.65); letter-spacing: 0.06em; text-transform: uppercase;
+  }
+
+  /* Counter animation */
+  .count-num { display: inline-block; }
+
+  /* Nav scroll effect */
+  nav.scrolled {
+    box-shadow: 0 4px 24px rgba(10,37,64,0.10);
+    background: rgba(255,255,255,0.98);
+  }
+
+  /* Section divider wave */
+  .wave-divider { display: block; width: 100%; overflow: hidden; line-height: 0; }
+  .wave-divider svg { display: block; width: 100%; }
+
+  /* Highlight line under section titles */
+  .section-title-underline {
+    display: inline-block; position: relative;
+  }
+  .section-title-underline::after {
+    content: ''; position: absolute; bottom: -6px; left: 0; height: 3px; width: 0;
+    background: var(--accent); border-radius: 2px;
+    transition: width 0.8s cubic-bezier(0.16,1,0.3,1) 0.4s;
+  }
+  .section-title-underline.visible::after { width: 100%; }
+
+  /* Pricing card hover lift */
+  .pricing-card:hover { transform: translateY(-8px); box-shadow: 0 16px 48px rgba(10,37,64,0.14); }
+
+  /* Teacher card image shimmer on hover */
+  .teacher-avatar { transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); }
+  .teacher-card:hover .teacher-avatar { transform: scale(1.04); }
+
+  /* Smooth underline links in footer */
+  .footer-col a { position: relative; }
+  .footer-col a::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1px; background:var(--accent); transition:width 0.25s; }
+  .footer-col a:hover::after { width:100%; }
+
+  /* Scroll progress bar at top */
+  #scroll-progress {
+    position: fixed; top: 0; left: 0; height: 3px; z-index: 2000;
+    background: linear-gradient(90deg, var(--primary), #6b8fff);
+    width: 0%; transition: width 0.1s linear;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div id="scroll-progress"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#home">
+    <div class="logo-icon" style="background:#1A3FFF; border-radius:10px;">
+      <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+        <!-- Navatha X mark -->
+        <path d="M8 8 L20.5 22 L8 36 L14 36 L22 26.5 L30 36 L36 36 L23.5 22 L36 8 L30 8 L22 17.5 L14 8 Z" fill="white"/>
+        <path d="M8 8 L14 8 L22 17.5 L30 8 L36 8 L23.5 22 L36 36 L30 36 L22 26.5 L14 36 L8 36 L20.5 22 Z" fill="white"/>
+      </svg>
+    </div>
+    <div>
+      <div class="logo-text" style="font-family:'DM Sans',sans-serif; font-weight:800; font-size:1.1rem; letter-spacing:-0.01em;">Navatha</div>
+      <div class="logo-sub">Tuition Services</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#grades">Grades</a></li>
+    <li><a href="#subjects">Subjects</a></li>
+    <li><a href="#teachers">Teachers</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#payment">Payment</a></li>
+    <li><a href="#enroll" class="nav-cta" onclick="openModal()">Enroll Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div id="particles-container" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;"></div>
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
+        Now Enrolling — 2025/26 Academic Year
+      </div>
+      <h1>Unlock Every<br>Grade's <em>Full</em><br>Potential</h1>
+      <p>Expert online tuition for Grades 4–12 across all subjects. Tailored learning, qualified Maldivian teachers, and seamless BML payment — all in one place.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn-primary">
+          View Packages
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#subjects" class="btn-outline">Explore Subjects</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="num">1,200+</div>
+          <div class="label">Students</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">40+</div>
+          <div class="label">Qualified Teachers</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">98%</div>
+          <div class="label">Pass Rate</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-stack">
+        <div class="float-card main">
+          <div class="fc-label">Current Session</div>
+          <div class="fc-subject">Advanced Mathematics</div>
+          <div class="fc-meta">Grade 10 · Mr. Ibrahim Hassan · Live Now</div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 65%;"></div></div>
+          <div style="font-size:0.75rem; color:rgba(255,255,255,0.5);">65% completed · 28 mins remaining</div>
+        </div>
+        <div class="float-cards-row">
+          <div class="mini-card">
+            <div class="mini-icon">📚</div>
+            <div class="mini-label">Subjects</div>
+            <div class="mini-value">18+</div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-icon">🏆</div>
+            <div class="mini-label">Top Rank</div>
+            <div class="mini-value">#1 MV</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRADES -->
+<section class="grades-section" id="grades">
+  <div style="max-width:1200px; margin: 0 auto;">
+    <div class="section-header reveal">
+      <div class="section-label">Grade Levels</div>
+      <div class="section-title section-title-underline">We Cover Every Grade</div>
+      <p class="section-subtitle">From Grade 4 through Grade 12 — foundational concepts to advanced exam preparation.</p>
+    </div>
+    <div class="grades-grid stagger">
+      <a href="#subjects" class="grade-chip active"><div class="gnum">4</div><div class="glabel">Grade</div></a>
+      <a href="#subjects" class="grade-chip"><div class="gnum">5</div><div class="glabel">Grade</div></a>
+      <a href="#subjects" class="grade-chip"><div class="gnum">6</div><div class="glabel">Grade</div></a>
+      <a href="#subjects" class="grade-chip"><div class="gnum">7</div><div class="glabel">Grade</div></a>
+      <a href="#subjects" class="grade-chip"><div class="gnum">8</div><div class="glabel">Grade</div></a>
+      <a href="#subjects" class="grade-chip"><div class="gnum">9</div><div class="glabel">Grade</div></a>
+      <a href="#subjects" class="grade-chip"><div class="gnum">10</div><div class="glabel">Grade</div></a>
+      <a href="#subjects" class="grade-chip"><div class="gnum">11</div><div class="glabel">Grade</div></a>
+      <a href="#subjects" class="grade-chip"><div class="gnum">12</div><div class="glabel">Grade</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE BANNER 1 -->
+<div class="img-banner">
+  <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1600&q=80&auto=format&fit=crop" alt="Students studying" loading="lazy" id="banner1-img">
+  <div class="img-banner-overlay reveal">
+    <div class="quote">"Education is the most powerful weapon which you can use to change the world."</div>
+    <div class="attr">— Nelson Mandela</div>
+  </div>
+</div>
+
+<!-- SUBJECTS -->
+<section id="subjects" style="background: var(--white);">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-header centered reveal">
+      <div class="section-label">What We Teach</div>
+      <div class="section-title section-title-underline">All Core Subjects Covered</div>
+      <p class="section-subtitle">Comprehensive tuition across sciences, languages, humanities, and more.</p>
+    </div>
+    <div class="subjects-grid stagger">
+      <div class="subject-card"><div class="subject-icon">➕</div><div class="subject-name">Mathematics</div><div class="subject-grades">Grades 4–12</div></div>
+      <div class="subject-card"><div class="subject-icon">🔬</div><div class="subject-name">Science</div><div class="subject-grades">Grades 4–12</div></div>
+      <div class="subject-card"><div class="subject-icon">⚗️</div><div class="subject-name">Chemistry</div><div class="subject-grades">Grades 9–12</div></div>
+      <div class="subject-card"><div class="subject-icon">⚡</div><div class="subject-name">Physics</div><div class="subject-grades">Grades 9–12</div></div>
+      <div class="subject-card"><div class="subject-icon">🧬</div><div class="subject-name">Biology</div><div class="subject-grades">Grades 9–12</div></div>
+      <div class="subject-card"><div class="subject-icon">📖</div><div class="subject-name">English</div><div class="subject-grades">Grades 4–12</div></div>
+      <div class="subject-card"><div class="subject-icon">🌙</div><div class="subject-name">Arabic</div><div class="subject-grades">Grades 4–12</div></div>
+      <div class="subject-card"><div class="subject-icon">🕌</div><div class="subject-name">Dhivehi</div><div class="subject-grades">Grades 4–12</div></div>
+      <div class="subject-card"><div class="subject-icon">🌍</div><div class="subject-name">Social Studies</div><div class="subject-grades">Grades 4–8</div></div>
+      <div class="subject-card"><div class="subject-icon">☪️</div><div class="subject-name">Islamic Studies</div><div class="subject-grades">Grades 4–12</div></div>
+      <div class="subject-card"><div class="subject-icon">💰</div><div class="subject-name">Business Studies</div><div class="subject-grades">Grades 10–12</div></div>
+      <div class="subject-card"><div class="subject-icon">📊</div><div class="subject-name">Accounting</div><div class="subject-grades">Grades 10–12</div></div>
+      <div class="subject-card"><div class="subject-icon">💻</div><div class="subject-name">ICT / Computing</div><div class="subject-grades">Grades 6–12</div></div>
+      <div class="subject-card"><div class="subject-icon">🗺️</div><div class="subject-name">Geography</div><div class="subject-grades">Grades 7–12</div></div>
+      <div class="subject-card"><div class="subject-icon">📜</div><div class="subject-name">History</div><div class="subject-grades">Grades 7–12</div></div>
+      <div class="subject-card"><div class="subject-icon">🎨</div><div class="subject-name">Art & Design</div><div class="subject-grades">Grades 4–10</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="background: var(--light);">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-header centered reveal">
+      <div class="section-label">Getting Started</div>
+      <div class="section-title section-title-underline">Simple as 1–2–3</div>
+    </div>
+    <div class="steps-grid stagger">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Enroll & Choose Plan</h3>
+        <p>Register your child, select their grade and subjects, then choose a tuition package that fits your needs.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Pay Securely via BML</h3>
+        <p>Complete payment instantly using your Bank of Maldives card or BML Internet Banking — 100% secure.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Start Learning Live</h3>
+        <p>Your child joins live sessions with qualified teachers, accesses recordings, and gets homework support.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Track Progress</h3>
+        <p>Receive monthly reports, performance dashboards, and teacher feedback to monitor your child's growth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE BANNER 2 -->
+<div class="img-banner">
+  <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600&q=80&auto=format&fit=crop" alt="Teacher in classroom" loading="lazy" id="banner2-img">
+  <div class="img-banner-overlay reveal">
+    <div class="quote">Learn from qualified teachers, from anywhere in the Maldives.</div>
+    <div class="attr">— EduBridge Academy</div>
+  </div>
+</div>
+
+<!-- TEACHERS -->
+<section class="teachers-section" id="teachers">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-header centered reveal">
+      <div class="section-label">Our Educators</div>
+      <div class="section-title section-title-underline">Expert Teachers, Real Results</div>
+      <p class="section-subtitle">All our teachers are qualified, experienced professionals dedicated to your child's success.</p>
+    </div>
+    <div class="teachers-grid stagger">
+      <div class="teacher-card">
+        <div class="teacher-avatar" style="background: linear-gradient(135deg,#0A2540,#1a4a7a);">IH</div>
+        <div class="teacher-info">
+          <div class="teacher-name">Ibrahim Hassan</div>
+          <div class="teacher-subject">Mathematics & Physics</div>
+          <div class="teacher-bio">MSc Mathematics, 12 years experience. Specializes in O-Level and A-Level exam preparation.</div>
+          <div class="teacher-rating">★★★★★ <span style="color:var(--muted); font-weight:400;">4.9 (286 reviews)</span></div>
+        </div>
+      </div>
+      <div class="teacher-card">
+        <div class="teacher-avatar" style="background: linear-gradient(135deg,#005f73,#0a9396);">FA</div>
+        <div class="teacher-info">
+          <div class="teacher-name">Fathimath Azleena</div>
+          <div class="teacher-subject">English Language & Literature</div>
+          <div class="teacher-bio">BA English (Hons), Cambridge CELTA certified. Expert in creative writing and comprehension.</div>
+          <div class="teacher-rating">★★★★★ <span style="color:var(--muted); font-weight:400;">4.8 (214 reviews)</span></div>
+        </div>
+      </div>
+      <div class="teacher-card">
+        <div class="teacher-avatar" style="background: linear-gradient(135deg,#7b2d8b,#a63db8);">AM</div>
+        <div class="teacher-info">
+          <div class="teacher-name">Ahmed Mujuthaba</div>
+          <div class="teacher-subject">Chemistry & Biology</div>
+          <div class="teacher-bio">BSc Chemistry, 8 years teaching. Known for making complex science concepts easy to grasp.</div>
+          <div class="teacher-rating">★★★★★ <span style="color:var(--muted); font-weight:400;">4.9 (198 reviews)</span></div>
+        </div>
+      </div>
+      <div class="teacher-card">
+        <div class="teacher-avatar" style="background: linear-gradient(135deg,#b5451b,#d4693a);">MS</div>
+        <div class="teacher-info">
+          <div class="teacher-name">Mariyam Shana</div>
+          <div class="teacher-subject">Dhivehi & Islamic Studies</div>
+          <div class="teacher-bio">BA Education (Maldives), 10 years experience. Passionate about Maldivian language and culture.</div>
+          <div class="teacher-rating">★★★★☆ <span style="color:var(--muted); font-weight:400;">4.7 (173 reviews)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="background: var(--white);">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-header centered reveal">
+      <div class="section-label">Tuition Packages</div>
+      <div class="section-title section-title-underline">Transparent Pricing</div>
+      <p class="section-subtitle">Choose a plan that works for your family. All prices in Maldivian Rufiyaa (MVR). No hidden fees.</p>
+    </div>
+    <div class="pricing-grid stagger" style="margin-top:2.5rem;">
+      <div class="pricing-card">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">MVR 1,200 <span>/month</span></div>
+        <div class="plan-desc">Perfect for students needing help in 1–2 subjects. Ideal for Grades 4–6.</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> 2 Subjects of choice</li>
+          <li><span class="check">✓</span> 8 Live sessions/month</li>
+          <li><span class="check">✓</span> Session recordings</li>
+          <li><span class="check">✓</span> Weekly homework review</li>
+          <li><span class="cross">–</span> Priority teacher access</li>
+          <li><span class="cross">–</span> Mock exam papers</li>
+          <li><span class="cross">–</span> Monthly progress report</li>
+        </ul>
+        <a href="#payment" class="btn-plan" onclick="selectPlan('Starter', 1200)">Enroll in Starter</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="featured-badge">Most Popular</div>
+        <div class="plan-name">Scholar</div>
+        <div class="plan-price">MVR 2,800 <span>/month</span></div>
+        <div class="plan-desc">Comprehensive support for core subjects. Perfect for Grades 7–10 exam prep.</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> 5 Subjects of choice</li>
+          <li><span class="check">✓</span> 20 Live sessions/month</li>
+          <li><span class="check">✓</span> Session recordings</li>
+          <li><span class="check">✓</span> Daily homework review</li>
+          <li><span class="check">✓</span> Priority teacher access</li>
+          <li><span class="check">✓</span> Mock exam papers</li>
+          <li><span class="check">✓</span> Monthly progress report</li>
+        </ul>
+        <a href="#payment" class="btn-plan featured-btn" onclick="selectPlan('Scholar', 2800)">Enroll in Scholar</a>
+      </div>
+      <div class="pricing-card">
+        <div class="plan-name">Excellence</div>
+        <div class="plan-price">MVR 4,500 <span>/month</span></div>
+        <div class="plan-desc">All-inclusive premium tuition for Grades 11–12 and intensive exam preparation.</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> All subjects unlimited</li>
+          <li><span class="check">✓</span> Unlimited live sessions</li>
+          <li><span class="check">✓</span> Session recordings</li>
+          <li><span class="check">✓</span> 24/7 homework support</li>
+          <li><span class="check">✓</span> Dedicated teacher</li>
+          <li><span class="check">✓</span> Full mock exam series</li>
+          <li><span class="check">✓</span> Weekly progress report</li>
+        </ul>
+        <a href="#payment" class="btn-plan" onclick="selectPlan('Excellence', 4500)">Enroll in Excellence</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT SECTION -->
+<section class="payment-section" id="payment">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="payment-grid">
+      <div class="reveal reveal-left">
+        <div class="section-label">Secure Payments</div>
+        <div class="section-title" style="color:#fff;">Pay with Confidence<br>via BML Gateway</div>
+        <p class="section-subtitle">We've integrated Bank of Maldives (BML) payment gateway to ensure every transaction is fast, safe, and fully secure for families across the Maldives.</p>
+        <div class="payment-features">
+          <div class="payment-feature">
+            <div class="pf-icon">🔒</div>
+            <div>
+              <div class="pf-title">256-bit SSL Encryption</div>
+              <div class="pf-desc">Your card details are encrypted end-to-end through BML's certified secure gateway.</div>
+            </div>
+          </div>
+          <div class="payment-feature">
+            <div class="pf-icon">🏦</div>
+            <div>
+              <div class="pf-title">BML Internet Banking</div>
+              <div class="pf-desc">Pay directly from your BML account using Internet Banking or BML Mobile app.</div>
+            </div>
+          </div>
+          <div class="payment-feature">
+            <div class="pf-icon">💳</div>
+            <div>
+              <div class="pf-title">All Major Cards Accepted</div>
+              <div class="pf-desc">Visa, Mastercard, and BML debit/credit cards are all supported.</div>
+            </div>
+          </div>
+          <div class="payment-feature">
+            <div class="pf-icon">🔄</div>
+            <div>
+              <div class="pf-title">Auto-Renewal Available</div>
+              <div class="pf-desc">Set up recurring monthly payments so your child never misses a class.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-right">
+        <div class="payment-form-card">
+          <div class="pf-header">
+            <div class="pf-title-main">Enroll & Pay</div>
+            <div class="bml-badge">🔒 BML Secured</div>
+          </div>
+          <div id="payment-form-content">
+            <div class="form-group">
+              <label class="form-label">Student Name</label>
+              <input type="text" class="form-input" placeholder="Full name of student" id="student-name">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Grade</label>
+                <select class="form-select" id="grade-select">
+                  <option value="">Select grade</option>
+                  <option>Grade 4</option><option>Grade 5</option><option>Grade 6</option>
+                  <option>Grade 7</option><option>Grade 8</option><option>Grade 9</option>
+                  <option>Grade 10</option><option>Grade 11</option><option>Grade 12</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Plan</label>
+                <select class="form-select" id="plan-select" onchange="updateAmount()">
+                  <option value="1200">Starter — MVR 1,200</option>
+                  <option value="2800" selected>Scholar — MVR 2,800</option>
+                  <option value="4500">Excellence — MVR 4,500</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Parent / Guardian Email</label>
+              <input type="email" class="form-input" placeholder="email@example.com" id="parent-email">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Parent Phone</label>
+              <input type="tel" class="form-input" placeholder="+960 XXX XXXX" id="parent-phone">
+            </div>
+            <div style="border-top: 1px solid var(--border); padding-top: 1.25rem; margin-top: 0.25rem;">
+              <div style="font-size:0.8rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.75rem;">Payment Details</div>
+              <div class="card-icons">
+                <div class="card-icon visa">VISA</div>
+                <div class="card-icon mc">MC</div>
+                <div class="card-icon bml">BML</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Cardholder Name</label>
+                <input type="text" class="form-input" placeholder="As on card" id="card-name">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Card Number</label>
+                <input type="text" class="form-input card-number-input" placeholder="1234 5678 9012 3456" id="card-number" maxlength="19" oninput="formatCard(this)">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Expiry Date</label>
+                  <input type="text" class="form-input" placeholder="MM/YY" maxlength="5" id="card-expiry" oninput="formatExpiry(this)">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">CVV</label>
+                  <input type="password" class="form-input" placeholder="•••" maxlength="4" id="card-cvv">
+                </div>
+              </div>
+            </div>
+            <div class="total-row">
+              <div>
+                <div class="total-label">Monthly Total</div>
+                <div style="font-size:0.75rem; color:var(--muted);">Auto-renewed each month</div>
+              </div>
+              <div style="text-align:right;">
+                <span class="total-amount" id="display-amount">MVR 2,800</span>
+              </div>
+            </div>
+            <button class="pay-btn" onclick="processPayment()">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1l2.5 5h5.5l-4.5 3.5 1.5 5.5L9 12l-5 3 1.5-5.5L1 6h5.5z" fill="white"/></svg>
+              Pay Securely via BML
+            </button>
+            <div class="secure-note">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="2" y="5" width="8" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M4 5V3.5a2 2 0 014 0V5" stroke="currentColor" stroke-width="1.2"/></svg>
+              Secured by BML Payment Gateway · PCI DSS Compliant
+            </div>
+          </div>
+          <div class="success-screen" id="success-screen">
+            <div class="success-icon">✅</div>
+            <div class="success-title">Enrollment Confirmed!</div>
+            <div class="success-msg">Thank you! Your child's enrollment has been confirmed and payment processed successfully.</div>
+            <div class="ref-code" id="ref-code"></div>
+            <p style="font-size:0.82rem; color:var(--muted); margin-bottom:1rem;">A confirmation email has been sent to your inbox. First class details will follow within 24 hours.</p>
+            <button class="pay-btn" onclick="resetForm()" style="font-size:0.88rem;">Enroll Another Student</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="testimonials">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-header centered reveal">
+      <div class="section-label">Parent Reviews</div>
+      <div class="section-title section-title-underline">What Families Are Saying</div>
+    </div>
+    <div class="testimonials-grid stagger">
+      <div class="testimonial-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"My daughter went from failing Maths to scoring an A in her O-Level. The teachers here are incredibly dedicated and patient."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#0A2540;">AM</div>
+          <div><div class="testi-name">Aminath Mohamed</div><div class="testi-role">Parent of Grade 10 student · Malé</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"The BML payment option is so convenient. I pay monthly without any hassle, and the quality of teaching is outstanding."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#005f73;">HA</div>
+          <div><div class="testi-name">Hassan Ali</div><div class="testi-role">Parent of Grade 7 student · Addu City</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"We live on an outer island and access to quality tuition was always a problem. EduBridge Academy changed everything for us."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#7b2d8b;">FS</div>
+          <div><div class="testi-name">Fathimath Sobah</div><div class="testi-role">Parent of Grade 12 student · Laamu Atoll</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE BANNER 3 -->
+<div class="img-banner">
+  <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1600&q=80&auto=format&fit=crop" alt="Student learning online" loading="lazy" id="banner3-img">
+  <div class="img-banner-overlay reveal">
+    <div class="quote">Every child deserves access to world-class education — wherever they are.</div>
+    <div class="attr">— EduBridge Academy Mission</div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-header centered reveal">
+      <div class="section-label">FAQ</div>
+      <div class="section-title section-title-underline">Common Questions</div>
+    </div>
+    <div class="faq-grid reveal">
+      <div class="faq-item open">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What grades do you teach? <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer"><p>We offer tuition for students in Grades 4 through 12, covering all core and elective subjects taught in Maldivian schools.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How does the BML payment work? <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer"><p>We use Bank of Maldives (BML) secure payment gateway. You can pay using your Visa, Mastercard, or BML debit/credit card. Payments are processed instantly and you receive a confirmation receipt by email.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Are sessions live or pre-recorded? <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer"><p>All sessions are live, interactive classes with qualified teachers. Recordings are also available after each session for revision purposes.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Can students from outer islands join? <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer"><p>Absolutely! Our platform is fully online, so students from any island in the Maldives can join with a stable internet connection.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What is the cancellation policy? <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer"><p>You can cancel your subscription at any time. Cancellations made before the next billing cycle will not be charged for the following month.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-text">EduBridge Academy</div>
+        <p style="margin-top:0.75rem;">Quality online tuition for every student in the Maldives, from Grades 4 to 12. Empowering futures through accessible, expert education.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#grades">Grade Levels</a></li>
+          <li><a href="#subjects">Subjects</a></li>
+          <li><a href="#teachers">Teachers</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="mailto:info@edubridge.mv">Contact Us</a></li>
+          <li><a href="#">Parent Portal</a></li>
+          <li><a href="#">Student Login</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Refund Policy</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 EduBridge Academy. All rights reserved. | Registered in Maldives</p>
+      <div class="bml-trust">
+        <div class="bml-seal">BML Secured</div>
+        <span>Payments powered by Bank of Maldives Gateway</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ENROLL MODAL -->
+<div class="modal-overlay" id="enroll-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-title">Quick Enrollment</div>
+    <div class="modal-subtitle">Get started in minutes. Fill in your details below.</div>
+    <div class="step-indicator">
+      <div class="step-dot active"></div>
+      <div class="step-dot active"></div>
+      <div class="step-dot"></div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Student's Full Name</label>
+      <input type="text" class="form-input" placeholder="Enter student name">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Grade</label>
+        <select class="form-select">
+          <option>Grade 4</option><option>Grade 5</option><option>Grade 6</option>
+          <option>Grade 7</option><option>Grade 8</option><option>Grade 9</option>
+          <option>Grade 10</option><option>Grade 11</option><option>Grade 12</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Plan</label>
+        <select class="form-select">
+          <option>Starter — MVR 1,200</option>
+          <option selected>Scholar — MVR 2,800</option>
+          <option>Excellence — MVR 4,500</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Parent Email</label>
+      <input type="email" class="form-input" placeholder="your@email.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Parent Phone</label>
+      <input type="tel" class="form-input" placeholder="+960 XXX XXXX">
+    </div>
+    <button class="pay-btn" onclick="closeModal(); document.getElementById('payment').scrollIntoView({behavior:'smooth'});" style="margin-top:0.5rem;">
+      Continue to Payment →
+    </button>
+  </div>
+</div>
+
+<script>
+/* ---- Modal ---- */
+function openModal() { document.getElementById('enroll-modal').classList.add('open'); }
+function closeModal() { document.getElementById('enroll-modal').classList.remove('open'); }
+document.getElementById('enroll-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+/* ---- FAQ accordion ---- */
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  item.classList.toggle('open');
+}
+
+/* ---- Card formatting ---- */
+function formatCard(input) {
+  let val = input.value.replace(/\D/g,'').substring(0,16);
+  input.value = val.replace(/(.{4})/g,'$1 ').trim();
+}
+function formatExpiry(input) {
+  let val = input.value.replace(/\D/g,'');
+  if (val.length >= 2) val = val.substring(0,2) + '/' + val.substring(2,4);
+  input.value = val;
+}
+
+/* ---- Amount update ---- */
+function updateAmount() {
+  const sel = document.getElementById('plan-select');
+  const amt = parseInt(sel.value).toLocaleString();
+  document.getElementById('display-amount').textContent = 'MVR ' + amt;
+}
+function selectPlan(name, amount) {
+  const sel = document.getElementById('plan-select');
+  sel.value = amount;
+  updateAmount();
+  setTimeout(() => document.getElementById('payment').scrollIntoView({behavior:'smooth'}), 100);
+}
+
+/* ---- Payment processing ---- */
+function processPayment() {
+  const name = document.getElementById('student-name').value.trim();
+  const email = document.getElementById('parent-email').value.trim();
+  const grade = document.getElementById('grade-select').value;
+  const cardNum = document.getElementById('card-number').value.trim();
+  const expiry = document.getElementById('card-expiry').value.trim();
+  const cvv = document.getElementById('card-cvv').value.trim();
+  if (!name || !email || !grade || cardNum.length < 19 || expiry.length < 5 || cvv.length < 3) {
+    alert('Please fill in all required fields correctly before proceeding.');
+    return;
+  }
+  const btn = document.querySelector('.pay-btn');
+  btn.textContent = 'Processing payment...';
+  btn.disabled = true;
+  setTimeout(() => {
+    document.getElementById('payment-form-content').style.display = 'none';
+    const success = document.getElementById('success-screen');
+    success.style.display = 'block';
+    const ref = 'BML-EDU-' + Math.random().toString(36).substring(2,8).toUpperCase();
+    document.getElementById('ref-code').textContent = 'Reference: ' + ref;
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1l2.5 5h5.5l-4.5 3.5 1.5 5.5L9 12l-5 3 1.5-5.5L1 6h5.5z" fill="white"/></svg> Pay Securely via BML';
+  }, 2200);
+}
+
+function resetForm() {
+  document.getElementById('payment-form-content').style.display = 'block';
+  document.getElementById('success-screen').style.display = 'none';
+  ['student-name','parent-email','parent-phone','card-name','card-number','card-expiry','card-cvv'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('grade-select').value = '';
+}
+
+/* ---- Grade chip toggle ---- */
+document.querySelectorAll('.grade-chip').forEach(chip => {
+  chip.addEventListener('click', function() {
+    document.querySelectorAll('.grade-chip').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+/* ===================== SCROLL ANIMATIONS ===================== */
+
+/* Scroll progress bar */
+const scrollBar = document.getElementById('scroll-progress');
+window.addEventListener('scroll', () => {
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = (window.scrollY / total) * 100;
+  scrollBar.style.width = pct + '%';
+}, { passive: true });
+
+/* Nav scroll class */
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+/* Intersection Observer for reveal elements */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Also trigger underline on section titles
+      const underline = entry.target.querySelector('.section-title-underline');
+      if (underline) underline.classList.add('visible');
+      if (entry.target.classList.contains('section-title-underline')) {
+        entry.target.classList.add('visible');
+      }
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+/* Apply reveal to all .reveal elements and stagger children */
+document.querySelectorAll('.reveal').forEach(el => {
+  revealObserver.observe(el);
+});
+
+/* Stagger children: add reveal to each child of .stagger */
+document.querySelectorAll('.stagger').forEach(container => {
+  Array.from(container.children).forEach((child, i) => {
+    child.classList.add('reveal');
+    child.style.transitionDelay = (i * 0.07) + 's';
+    revealObserver.observe(child);
+  });
+});
+
+/* Section title underlines */
+document.querySelectorAll('.section-title-underline').forEach(el => {
+  revealObserver.observe(el);
+});
+
+/* ---- Floating Particles in Hero ---- */
+(function spawnParticles() {
+  const container = document.getElementById('particles-container');
+  if (!container) return;
+  function createParticle() {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 18 + 6;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      bottom:-${size}px;
+      animation-duration:${Math.random()*14+10}s;
+      animation-delay:${Math.random()*8}s;
+      opacity:${Math.random()*0.5+0.1};
+    `;
+    container.appendChild(p);
+    p.addEventListener('animationend', () => { p.remove(); createParticle(); });
+  }
+  for (let i = 0; i < 22; i++) createParticle();
+})();
+
+/* ---- Parallax on image banners ---- */
+const bannerImgs = [
+  document.getElementById('banner1-img'),
+  document.getElementById('banner2-img'),
+  document.getElementById('banner3-img'),
+].filter(Boolean);
+
+function updateParallax() {
+  bannerImgs.forEach(img => {
+    const banner = img.closest('.img-banner');
+    if (!banner) return;
+    const rect = banner.getBoundingClientRect();
+    const center = rect.top + rect.height / 2;
+    const vCenter = window.innerHeight / 2;
+    const offset = (center - vCenter) * 0.22;
+    img.style.transform = `translateY(${offset}px)`;
+  });
+}
+window.addEventListener('scroll', updateParallax, { passive: true });
+window.addEventListener('resize', updateParallax);
+updateParallax();
+
+/* ---- Animated counters in hero stats ---- */
+function animateCounter(el, target, suffix) {
+  let start = 0;
+  const duration = 1800;
+  const step = timestamp => {
+    if (!start) start = timestamp;
+    const progress = Math.min((timestamp - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(eased * target);
+    el.textContent = current.toLocaleString() + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const nums = entry.target.querySelectorAll('.hero-stat .num');
+      nums.forEach(num => {
+        const text = num.textContent;
+        if (text.includes('1,200')) animateCounter(num, 1200, '+');
+        else if (text.includes('40')) animateCounter(num, 40, '+');
+        else if (text.includes('98')) animateCounter(num, 98, '%');
+      });
+      statsObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+const heroStats = document.querySelector('.hero-stats');
+if (heroStats) statsObserver.observe(heroStats);
+</script>
+
+</body>
+</html>
